@@ -8,4 +8,4 @@ Weekly homework lives in `WeekNN` folders. Each week's assignment is the
 
 | Week | Folder | Assignment |
 | --- | --- | --- |
-| 01 | `Week01.playground` | [Swift fundamentals](https://github.com/molab-itp/content-2026-ima/blob/main/weeks/01_intro.md#homework-week01) |
+| 01 | `Week01/MyPlayground.playground` | [Swift fundamentals](https://github.com/molab-itp/content-2026-ima/blob/main/weeks/01_intro.md#homework-week01) |
