@@ -56,6 +56,53 @@ func noise(_ rows: Int) {
     }
 }
 
+/// Checkerboard, using modulo on the summed coordinates to alternate tone.
+func checker(_ block: Int) {
+    for y in 0..<height {
+        var row = ""
+        for x in 0..<width {
+            let on = ((x / block) + (y / block)) % 2 == 0
+            row += on ? charAt(palette, palette.count - 1) : charAt(palette, 0)
+        }
+        print(row)
+    }
+}
+
+/// Concentric ripples: shade by distance from the centre, so tone rings outward.
+func ripple() {
+    let cx = Double(width) / 2.0
+    let cy = Double(height) / 2.0
+    let maxD = sqrt(cx * cx + cy * cy)
+    for y in 0..<height {
+        var row = ""
+        for x in 0..<width {
+            let dx = Double(x) - cx
+            let dy = (Double(y) - cy) * 2.0        // rows are taller than columns, so scale
+            let d = sqrt(dx * dx + dy * dy) / maxD
+            let t = (sin(d * 12.0) + 1.0) / 2.0    // -1...1 -> 0...1
+            row += shade(t)
+        }
+        print(row)
+    }
+}
+
+/// A gradient-bordered frame: the edge fades from dark to light around the box.
+func frame() {
+    for y in 0..<height {
+        var row = ""
+        for x in 0..<width {
+            let onEdge = x == 0 || x == width - 1 || y == 0 || y == height - 1
+            if onEdge {
+                let t = Double(x + y) / Double(width + height)
+                row += shade(t)
+            } else {
+                row += " "
+            }
+        }
+        print(row)
+    }
+}
+
 // ---- output ----------------------------------------------------------------
 
 wave()
@@ -63,3 +110,9 @@ print("")
 triangle()
 print("")
 noise(4)
+print("")
+checker(2)
+print("")
+ripple()
+print("")
+frame()
