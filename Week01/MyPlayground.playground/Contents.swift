@@ -1,6 +1,7 @@
 //: # Week 01 — Text Art
 //: Part 2: a playground that produces text art using variables, for-loops and functions.
 //: Reference: molab-itp/01-Playground "generative random"
+//ai helped with code
 
 import Foundation
 
