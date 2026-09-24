@@ -1,13 +1,6 @@
-//
-//  RandomArtView.swift
-//  Canvas-Explore
-//
-
 import SwiftUI
 
-// An image composed of random elements:
-// an array of circles, each with random position, size, color, and opacity.
-
+// everything one circle needs, all picked randomly
 struct CircleSpec {
   var center: CGPoint
   var radius: CGFloat
@@ -15,7 +8,9 @@ struct CircleSpec {
   var opacity: Double
 }
 
+// bunch of random circles on a black background
 struct RandomArtView: View {
+  // the picture lives in this array
   @State private var circles: [CircleSpec] = []
   @State private var canvasSize: CGSize = .zero
 
@@ -26,8 +21,9 @@ struct RandomArtView: View {
     VStack {
       GeometryReader { geo in
         Canvas { context, size in
-          // Drawing order matters: later circles paint over earlier ones
+          // later circles draw on top of earlier ones
           for c in circles {
+            // circle rect is centered on the point, so shift back by radius
             let rect = CGRect(x: c.center.x - c.radius,
                               y: c.center.y - c.radius,
                               width: c.radius * 2,
@@ -42,6 +38,7 @@ struct RandomArtView: View {
           regenerate()
         }
       }
+      // new random circles
       Button("Regenerate") {
         regenerate()
       }
@@ -50,7 +47,7 @@ struct RandomArtView: View {
     }
   }
 
-  // Build a fresh array of random circle specs
+  // make 80 circles with random everything
   func regenerate() {
     guard canvasSize.width > 0 else { return }
     circles = (0..<count).map { _ in

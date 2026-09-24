@@ -1,23 +1,14 @@
-//
-//  TenPrintView.swift
-//  Canvas-Explore
-//
-
 import SwiftUI
 
-// Static 10PRINT: instead of animating one cell at a time (see CanvasAnimView),
-// generate the whole grid of random slashes up front into a 2D array,
-// then draw the finished image in a single Canvas pass.
-// Model (the array of cells) is separate from rendering (the Canvas).
-
-// One cell of the grid: which diagonal to draw, and in what color
+// one cell = which way the slash leans + its color
 struct TenPrintCell {
   var leftToRight: Bool
   var color: Color
 }
 
+// 10print but static, whole grid gets made at once then drawn in one go
 struct TenPrintView: View {
-  // The image "recipe" lives in this 2D array; changing it redraws the Canvas
+  // 2d array holds the whole picture, changing it redraws the canvas
   @State private var grid: [[TenPrintCell]] = []
   @State private var canvasSize: CGSize = .zero
 
@@ -28,20 +19,21 @@ struct TenPrintView: View {
     VStack {
       GeometryReader { geo in
         Canvas { context, size in
+          // cell size comes from screen width / number of columns
           let cellSize = size.width / CGFloat(ncols)
           let style = StrokeStyle(lineWidth: 6, lineCap: .round)
           for (row, rowCells) in grid.enumerated() {
             for (col, cell) in rowCells.enumerated() {
-              // Convert grid coordinates (row, col) to canvas points
+              // turn row/col into actual x/y on screen
               let x = CGFloat(col) * cellSize
               let y = CGFloat(row) * cellSize
               var path = Path()
               if cell.leftToRight {
-                // Diagonal from top-left to bottom-right: "\"
+                // "\" slash
                 path.move(to: CGPoint(x: x, y: y))
                 path.addLine(to: CGPoint(x: x + cellSize, y: y + cellSize))
               } else {
-                // Diagonal from top-right to bottom-left: "/"
+                // "/" slash
                 path.move(to: CGPoint(x: x + cellSize, y: y))
                 path.addLine(to: CGPoint(x: x, y: y + cellSize))
               }
@@ -50,10 +42,12 @@ struct TenPrintView: View {
           }
         }
         .onAppear {
+          // need the size before we can build the grid
           canvasSize = geo.size
           regenerate()
         }
       }
+      // reroll the whole picture
       Button("Regenerate") {
         regenerate()
       }
@@ -62,13 +56,14 @@ struct TenPrintView: View {
     }
   }
 
-  // Fill the 2D array with fresh random cells; enough rows to cover the height
+  // fill the array with fresh random cells, enough rows to cover the screen
   func regenerate() {
     let cellSize = canvasSize.width / CGFloat(ncols)
     guard cellSize > 0 else { return }
     let nrows = Int(ceil(canvasSize.height / cellSize))
     grid = (0..<nrows).map { _ in
       (0..<ncols).map { _ in
+        // coin flip for direction, random color from palette
         TenPrintCell(leftToRight: Bool.random(),
                      color: palette.randomElement()!)
       }
