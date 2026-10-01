@@ -8,5 +8,3 @@ little music app, 2 pages, plays songs + shows time
 - time is a `Timer` that ticks 4x a sec to move the slider
 
 songs: One More Time (Daft Punk), Diamonds (Young Thug ft. Gunna), Fractal Chapel (musicovermind, free on Pixabay)
-
-claude set up the xcode project and wrote most of the code, I picked the songs
