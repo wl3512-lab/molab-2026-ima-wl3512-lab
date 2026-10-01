@@ -1,12 +1,12 @@
 # Week04 – SongPlayer
 
-A two-page SwiftUI music app that uses audio playback and time.
+little music app, 2 pages, plays songs + shows time
 
-- **Page 1, playlist:** three songs, each with its length, plus the total playlist time. A mini player stays pinned at the bottom so you can pause without opening the player.
-- **Page 2, now playing:** cover art, a progress slider with elapsed and remaining time (drag it to seek), play/pause, and skip back/forward. When a song ends, the next one starts.
-- Audio: `AVAudioPlayer` playing mp3s bundled in `SongPlayer/Audio`
-- Time: a `Timer` updates the progress four times a second
+- **page 1:** playlist with 3 songs, how long each one is + the total. there's a mini player at the bottom so you can pause without opening anything
+- **page 2:** now playing. cover, a slider with time played / time left (drag it to skip around), play/pause, back/next. when a song ends the next one just starts
+- audio is `AVAudioPlayer`, the mp3s live in `SongPlayer/Audio`
+- time is a `Timer` that ticks 4x a sec to move the slider
 
-Songs: One More Time (Daft Punk), Diamonds (Young Thug ft. Gunna), Fractal Chapel (musicovermind, via Pixabay)
+songs: One More Time (Daft Punk), Diamonds (Young Thug ft. Gunna), Fractal Chapel (musicovermind, free on Pixabay)
 
-Built with help from Claude (AI) for the project setup and code.
+claude set up the xcode project and wrote most of the code, I picked the songs
