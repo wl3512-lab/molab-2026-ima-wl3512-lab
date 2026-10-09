@@ -1,6 +1,6 @@
 //
-// NavigationLink for each shape
-//  no NavigationView here, the home screen's NavigationStack covers it
+// page 5: every row is a link. tap a shape -> its own page
+// no NavigationView here, the home screen's NavigationStack covers it
 
 import SwiftUI
 
@@ -9,6 +9,7 @@ struct Page5: View {
     List {
       ForEach(imageArray, id: \.self) { item in
         NavigationLink {
+          // where you go when you tap: the shape big, with its name
           VStack {
             Image(systemName: item)
               .resizable()
@@ -17,6 +18,7 @@ struct Page5: View {
             Spacer()
           }
         } label: {
+          // what the row looks like in the list
           HStack {
             Image(systemName: item)
               .resizable()
