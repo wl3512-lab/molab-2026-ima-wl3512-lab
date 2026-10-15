@@ -14,7 +14,9 @@ struct OrderView: View {
         NavigationStack {
             List {
                 Section {
-                    ForEach(order.items) { item in
+                    // A customer can add the same menu item more than once.
+                    ForEach(order.items.indices, id: \.self) { index in
+                        let item = order.items[index]
                         HStack {
                             Text(item.name)
                             Spacer()
@@ -30,6 +32,16 @@ struct OrderView: View {
                     }
                 }
                 .disabled(order.items.isEmpty)
+
+                Section {
+                    if let message = order.storageError {
+                        Text(message)
+                            .foregroundStyle(.red)
+                    } else {
+                        Text("Your order is saved on this device.")
+                            .foregroundStyle(.secondary)
+                    }
+                }
             }
             .navigationTitle("Order")
             .listStyle(.insetGrouped)
