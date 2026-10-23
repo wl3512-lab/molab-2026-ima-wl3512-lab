@@ -10,6 +10,7 @@ Mobile App Development Lab — Fall 2026 · IMNY-UT 220 · Fridays 9:00–12:00,
 - [ ] able to build and run example apps own iPhone
 - [x] installed Xcode 27 (27.1)
 - [ ] watched at least one WWDC video
+- [ ] Upload profile photo to HOS-Lobby app
 
 ## Weekly homework
 
