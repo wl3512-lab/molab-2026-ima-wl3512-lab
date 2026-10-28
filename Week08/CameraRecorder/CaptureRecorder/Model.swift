@@ -17,6 +17,8 @@ class Model: NSObject, AVCaptureFileOutputRecordingDelegate {
   var previewImage: CGImage?
   var showingSavedAlert = false
   var selectedEffect: VideoEffect = .normal
+  var trail = 0.85
+  @ObservationIgnored var lastFrame: CIImage?
   @ObservationIgnored var currentEffect: VideoEffect = .normal
   @ObservationIgnored var context: CIContext?
 

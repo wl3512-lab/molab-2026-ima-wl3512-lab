@@ -20,6 +20,7 @@ enum VideoEffect: String, CaseIterable {
   case thermal = "Thermal"
   case sepia = "Sepia"
   case vignette = "Vignette"
+  case ghost = "Ghost"
   var filterName: String? {
     switch self {
     case .normal: return nil
@@ -31,6 +32,7 @@ enum VideoEffect: String, CaseIterable {
     case .sepia: return "CISepiaTone"
     case .vignette: return "CIVignette"
     case .crystallize: return "CICrystallize"
+    case .ghost: return "CIDissolveTransition"
     }
   }
 }
@@ -69,6 +71,10 @@ extension Model {
           // inputRadius
           // inputCenter CIVector
           filter.setValue(40.0, forKey: "inputRadius")
+        case .ghost:
+          // blend this frame with the last one we showed, so movement leaves trails
+          filter.setValue(lastFrame ?? ciImage, forKey: kCIInputTargetImageKey)
+          filter.setValue(trail, forKey: kCIInputTimeKey)
         default:
           break
         }
@@ -86,6 +92,8 @@ extension Model {
 
     // Dispatch update to preview
     if let cgImage = context!.createCGImage(filteredImage, from: filteredImage.extent) {
+      // keep real pixels, not the filter recipe, or every frame would chain every earlier one
+      lastFrame = CIImage(cgImage: cgImage)
       DispatchQueue.main.async {
         self.previewImage = cgImage
       }

@@ -14,6 +14,11 @@ struct ContentView: View {
         .edgesIgnoringSafeArea(.all)
       VStack {
         Spacer()
+        if model.selectedEffect == .ghost {
+          Slider(value: $model.trail, in: 0...0.95)
+            .tint(.pink)
+            .padding(.horizontal)
+        }
         FilterSelectionView()
         RecordButtonView()
       }
