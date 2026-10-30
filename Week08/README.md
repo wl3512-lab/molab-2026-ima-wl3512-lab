@@ -52,4 +52,4 @@ HabitaBull is still the final. research so far: [Week07/final-research.md](../We
 
 - based on [molab-itp/08-CameraRecorder](https://github.com/molab-itp/08-CameraRecorder) by jht, with `FrameView` from [08-FilterTheWorld](https://github.com/molab-itp/08-FilterTheWorld)
 - [CIDissolveTransition](https://developer.apple.com/library/archive/documentation/GraphicsImaging/Reference/CoreImageFilterReference/index.html#//apple_ref/doc/filter/ci/CIDissolveTransition) in the Core Image Filter Reference
-- Claude (Anthropic), October 28, 2026, suggested the ghost effect, wrote the code changes and this README, and ran the simulator build. AI-assisted work
+- Claude (Anthropic), October 28, 2026 wrote the code help and this README
