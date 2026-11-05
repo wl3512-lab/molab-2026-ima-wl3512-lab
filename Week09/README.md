@@ -39,4 +39,4 @@ no Swift changes. the class repo already has the finished app, so this week was 
 ## sources / AI assistance
 
 - based on [molab-itp/09-MakeItSo](https://github.com/molab-itp/09-MakeItSo) and [peterfriese/MakeItSo](https://peterfriese.github.io/MakeItSo/tutorials/makeitso/)
-- Claude (Anthropic), November 5, 2026, assisted with setting up Firebase, debugged the Xcode launch error, checked the Firestore data, and drafted this README. AI-assisted work
+- I used Claude (Anthropic), November 5, 2026, to set up Firebase and update my wiki. AI-assisted work
