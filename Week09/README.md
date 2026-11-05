@@ -30,7 +30,7 @@ due date:
 | `Reminder.swift` | `dueDate: Date?`, optional so older reminders with no date still load. `isOverdue` is true from the day after the due date, and never if it's done |
 | `EditReminderDetailsView.swift` | Due date toggle + date-only `DatePicker`, with custom `Binding`s because the picker needs a `Date` and the model holds a `Date?` |
 | `RemindersListRowView.swift` | shows "Due Nov 20, 2026" under the title, grey or red |
-| `RemindersRepository.swift` | removed `merge: true` from `setData`. a nil date isn't in the encoded data, so merging kept the old date and it came back |
+| `RemindersRepository.swift` | removed `merge: true` from `setData`. a nil date isn't in the encoded data, so merging would keep the old date |
 
 ## run it
 
