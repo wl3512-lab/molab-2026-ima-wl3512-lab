@@ -26,7 +26,14 @@ struct RemindersListRowView: View {
     HStack {
       Toggle(isOn: $reminder.isCompleted) { /* no label, on purpose */}
         .toggleStyle(.reminder)
-      Text(reminder.title)
+      VStack(alignment: .leading, spacing: 2) {
+        Text(reminder.title)
+        if let dueDate = reminder.dueDate {
+          Text("Due \(dueDate.formatted(date: .abbreviated, time: .omitted))")
+            .font(.caption)
+            .foregroundColor(reminder.isOverdue ? .red : .secondary)
+        }
+      }
       Spacer()
     }
     .contentShape(Rectangle())

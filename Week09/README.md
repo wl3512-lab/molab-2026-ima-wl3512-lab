@@ -6,14 +6,31 @@ Option 1: a to-do list that saves to the cloud. it's the class [09-MakeItSo](htt
 
 <img src="screenshots/reminders.png" width="260" alt="MakeItSo running in the iPhone 17 simulator with one reminder, Meal prep">
 
+my addition: **due dates**. turn on Due date on a reminder, pick a day, and it shows under the title. it turns red once it's late, unless the reminder is done
+
+<img src="screenshots/due-dates.png" width="360" alt="iPad simulator list with test reminders: no date, a grey due date, and a red overdue date"> <img src="screenshots/edit-due-date.png" width="360" alt="Details sheet with a Due date toggle and a date picker">
+
+(the TEST reminders were test data, deleted after)
+
 ## what I changed
 
-no Swift changes. the class repo already has the finished app, so this week was the Firebase setup:
+the class repo already has the finished app, so this week was the Firebase setup, plus one feature.
+
+setup:
 
 - team + bundle ID in Xcode → `com.wl3512.MakeItSo`
 - new Firebase project, with an iOS app registered to that bundle ID
 - swapped in my own `GoogleService-Info.plist` so the app stopped pointing at the class project
 - made a Firestore database in test mode
+
+due date:
+
+| file | what changed |
+| --- | --- |
+| `Reminder.swift` | `dueDate: Date?`, optional so older reminders with no date still load. `isOverdue` is true from the day after the due date, and never if it's done |
+| `EditReminderDetailsView.swift` | Due date toggle + date-only `DatePicker`, with custom `Binding`s because the picker needs a `Date` and the model holds a `Date?` |
+| `RemindersListRowView.swift` | shows "Due Nov 20, 2026" under the title, grey or red |
+| `RemindersRepository.swift` | removed `merge: true` from `setData`. a nil date isn't in the encoded data, so merging kept the old date and it came back |
 
 ## run it
 
@@ -33,10 +50,11 @@ no Swift changes. the class repo already has the finished app, so this week was 
 
 - ran on the iPhone 17 simulator (Nov 5). added "Meal prep", it showed up in the list
 - read the `reminders` collection back from Firestore's REST API: one document, `title: "Meal prep"`, `isCompleted: false`, created 2026-11-05 18:38 UTC. so it really reached the cloud
-- tested adding only. didn't test edit, delete, or two devices at once
+- due dates, on the real database with a throwaway test build: added one from the app (saved as a Firestore timestamp), loaded it back, cleared it (field gone), and Meal prep with no date still loaded. grey + red both show up right, and the details sheet opens with the saved date
+- not tested by hand: tapping the toggle and picking a date, deleting, or two devices at once
 - launched on the iPad Pro 13-inch (M5) simulator too. Xcode showed "Could not attach to pid" with a code signature message, but the log shows the app got a normal stop signal (SIGTERM) and didn't crash. signing was fine
 
 ## sources / AI assistance
 
 - based on [molab-itp/09-MakeItSo](https://github.com/molab-itp/09-MakeItSo) and [peterfriese/MakeItSo](https://peterfriese.github.io/MakeItSo/tutorials/makeitso/)
-- I used Claude (Anthropic), November 5, 2026, to set up Firebase and update my wiki. AI-assisted work
+- I used Claude (Anthropic), November 5, 2026, to set up Firebase, add the due date feature, and update my wiki. AI-assisted work

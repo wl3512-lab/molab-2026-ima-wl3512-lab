@@ -24,6 +24,15 @@ struct Reminder: Identifiable, Codable {
   var id: String?
   var title: String
   var isCompleted = false
+  var dueDate: Date? = nil
+}
+
+extension Reminder {
+  /// Late only from the day after the due date, and never once it's done.
+  var isOverdue: Bool {
+    guard let dueDate, !isCompleted else { return false }
+    return dueDate < Calendar.current.startOfDay(for: Date())
+  }
 }
 
 extension Reminder {

@@ -82,7 +82,8 @@ public class RemindersRepository: ObservableObject {
       .firestore()
       .collection(Reminder.collectionName)
       .document(documentId)
-      .setData(from: reminder, merge: true)
+      // No merge: a removed due date isn't in the encoded data, so merging would keep the old one.
+      .setData(from: reminder)
   }
 
   func removeReminder(_ reminder: Reminder) {

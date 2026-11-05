@@ -41,6 +41,20 @@ struct EditReminderDetailsView: View {
 
   let onCommit: (_ reminder: Reminder) -> Void
 
+  private var hasDueDate: Binding<Bool> {
+    Binding(
+      get: { reminder.dueDate != nil },
+      set: { reminder.dueDate = $0 ? (reminder.dueDate ?? Date()) : nil }
+    )
+  }
+
+  private var dueDate: Binding<Date> {
+    Binding(
+      get: { reminder.dueDate ?? Date() },
+      set: { reminder.dueDate = $0 }
+    )
+  }
+
   private func commit() {
     onCommit(reminder)
     dismiss()
@@ -58,6 +72,10 @@ struct EditReminderDetailsView: View {
           .onSubmit {
             commit()
           }
+        Toggle("Due date", isOn: hasDueDate)
+        if reminder.dueDate != nil {
+          DatePicker("Date", selection: dueDate, displayedComponents: .date)
+        }
       }
       .navigationTitle(mode == .add ? "New Reminder" : "Details")
       .navigationBarTitleDisplayMode(.inline)
