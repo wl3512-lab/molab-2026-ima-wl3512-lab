@@ -57,4 +57,4 @@ due date:
 ## sources / AI assistance
 
 - based on [molab-itp/09-MakeItSo](https://github.com/molab-itp/09-MakeItSo) and [peterfriese/MakeItSo](https://peterfriese.github.io/MakeItSo/tutorials/makeitso/)
-- I used Claude (Anthropic), November 5, 2026, to set up Firebase, add the due date feature, and update my wiki. AI-assisted work
+- I used Claude (Anthropic), November 5, 2026, to set up Firebase, and update my wiki. AI-assisted work
