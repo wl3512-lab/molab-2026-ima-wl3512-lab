@@ -29,5 +29,6 @@ Weekly homework lives in `WeekNN` folders. Each week's assignment is the
 | 07 | [`Week07`](Week07) | [Photo Media](https://github.com/molab-itp/content-2026-ima/blob/main/weeks/07_photo.md#homework-week07) |
 | 08 | [`Week08`](Week08) | [Video Media](https://github.com/molab-itp/content-2026-ima/blob/main/weeks/08_video.md#homework-week08) |
 | 09 | [`Week09`](Week09) | [Multi User Experience 1](https://github.com/molab-itp/content-2026-ima/blob/main/weeks/09_multi.md#homework-week09) |
+| 10 | [`Week10`](Week10) | [Final project proposal](https://github.com/molab-itp/content-2026-ima/blob/main/weeks/10_multi.md#homework-week10) |
 
 Final project: [HabitaBull](https://github.com/wl3512-lab/habitabull-ios), see [Week07/final-research.md](Week07/final-research.md)
